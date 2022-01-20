@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <title>Document</title>
+</head>
+<body>
+    
+    <div id="cookieConsent">
+       <div id="closeCookieConsent">x</div>
+       <div class="container p-2">
+       <p class="mt-2 text-white">Our website uses cookies so that we can remember you and provide you with the best experience on our website. If you do not agree with our use of cookies, please change the current settings in your browser privacy preferences. You may also read more about cookies and similar technologies <a href="./privacy/" target="_blank">here</a>. Otherwise, you agree to the use of cookies as they are currently set.</p> <a class="cookieConsentOK btn btn-lightgray2 uppercase btn-sm mb-2" onclick="setCookie('clicklink', 'yes', 30)">I Agree</a></div>
+       </div>
+       </div>
+
+
+       <script>
+       $(document).ready(function () {
+  const hideCookieConstent = getCookie('clicklink') === 'yes'
+
+  if (!hideCookieConstent) {
+    setTimeout(function () {
+      $('#cookieConsent').fadeIn(200)
+    }, 4000)
+  }
+  $('#closeCookieConsent, .cookieConsentOK').click(function () {
+    $('#cookieConsent').fadeOut(200)
+  })
+})
+
+//set the cookie
+
+function setCookie(cname, cvalue, exdays) {
+  var d = new Date()
+  d.setTime(d.getTime() + exdays * 24 * 60 * 60 * 1000)
+  var expires = 'expires=' + d.toUTCString()
+  document.cookie = cname + '=' + cvalue + '; ' + expires
+}
+
+//get the cookie
+
+function getCookie(cname) {
+  var name = cname + '='
+  var ca = document.cookie.split(';')
+  console.log('ca:', ca)
+  for (var i = 0; i < ca.length; i++) {
+    var c = ca[i]
+    while (c.charAt(0) == ' ') c = c.substring(1)
+    if (c.indexOf(name) == 0) return c.substring(name.length, c.length)
+  }
+  return ''
+}
+
+//check cookie on load
+
+function checkCookieOnLoad() {
+  if (getCookie('clicklink') === 'yes') {
+    // Show content and hide clicklink
+    document.getElementById('cookieConsent').style.display = 'none'
+  } else {
+    // Hide content and show clicklink
+    document.getElementById('cookieConsent').style.display = 'initial'
+  }
+}
+
+checkCookieOnLoad()
+
+       </script>
+</body>
+</html>
+    
+    
